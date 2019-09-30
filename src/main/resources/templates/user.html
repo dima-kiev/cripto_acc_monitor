@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Carsten App</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <span>User: </span>
+            <span th:text="${userName}"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="#" th:object="${form}" method="post">
+                <div class="row">
+                    <span>from: </span>
+                    <span><input type="datetime-local" th:field="*{fromDate}" /></span>
+                    <span> to: </span>
+                    <span><input type="datetime-local" th:field="*{toDate}" /></span>
+                </div>
+
+                <div class="row" th:each="coin, stat : ${form.wallets.entrySet()}">
+                    <div class="col-md-12">
+                        <input type="hidden" th:field="*{coins[__${coin.key}__]}"/>
+                        <input type="checkbox" th:field="*{wallets[__${coin.key}__]}" th:id="${coin.key}"/>
+                        <label th:for="${coin.key}" th:text="*{coins['__${coin.key}__'] + ':__${coin.key}__'}"></label>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <button type="button" class="btn btn-primary" th:value="'/check/' + ${userId}">Check only</button>
+                <button type="button" class="btn btn-primary" th:value="'/scrap-and-check/' + ${userId}">Scrap and check</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    $(document).ready(function () {
+        $(".btn").on("click", function(el){
+            $("form").attr("action", $(el.target).val()).submit();
+        });
+    })
+</script>
+</html>

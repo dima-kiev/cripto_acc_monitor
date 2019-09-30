@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Carsten App</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <a th:href="${'user/' + userId}" th:text="${userName}"></a>
+        </div>
+        <div class="col-md-12">
+        <a th:href="${'user/' + userId2}" th:text="${userName2}"></a>
+    </div>
+    </div>
+
+</body>
+
+</html>

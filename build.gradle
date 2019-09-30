@@ -1,0 +1,54 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.ridnaxata'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            //srcDir 'src'
+            exclude 'main/resources/application.properties'
+        }
+    }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	//compile('org.springframework.boot:spring-boot-starter-quartz')
+	//compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.1.RELEASE'
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '2.2.4'
+	//compile('org.seleniumhq.selenium:selenium-server')
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.13.0'
+	compile('org.seleniumhq.selenium:selenium-remote-driver')
+	compile('org.seleniumhq.selenium:selenium-java')
+	//compile('org.flywaydb:flyway-core')
+
+	runtime('mysql:mysql-connector-java')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.security:spring-security-test')
+}
